@@ -1,12 +1,12 @@
 # From Laptop to Cloud: Self-Hosting Gen AI for Privacy and Performance
 
-## The Rise of Generative Artificial Intelligence
+## The Rise of Generative Artificial Intelligence and Private Foundation Models
 
 ## Privacy Needs for Individuals and Businesses
 
-##  Glossary of Terms
+## Glossary of Terms
 
-## Public Functional Models and Their Many Uses
+## The Introduction of Public Foundation Models
 
 ### Researching Models
 - Ollama Model Library
