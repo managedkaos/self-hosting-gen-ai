@@ -5,6 +5,13 @@
 ## Privacy Needs for Individuals and Businesses
 
 ## Glossary of Terms
+- GPT: generative pre-trained transformer
+- Token: the smallest unit of text used in processing prompts and generating repsonses; consider a token to be ~4 characters
+- Latency (ms): The amount of time the FM uses to generate each token in a sequence
+- Input token count: The number of input tokens used by the FM during inference.
+- Output token count: The number of tokens generated in a response by the FM.
+- Tokens per second: The rate at which the model is able to generate a response
+- Time to first token: The amount of time between the client's request being received and the first token sent in response
 
 ## The Introduction of Public Foundation Models
 
