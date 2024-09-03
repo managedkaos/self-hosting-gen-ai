@@ -9,7 +9,11 @@
 
 ## The Rise of Generative Artificial Intelligence
 
-### 2015
+### 1950 - 2015
+
+- [What is the history of artificial intelligence (AI)? (Tableau)](https://www.tableau.com/data-insights/ai/history)
+
+  > Birth of AI: 1950-1956: Alan Turing published his work “Computer Machinery and Intelligence” which eventually became The Turing Test, which experts used to measure computer intelligence. The term “artificial intelligence” was coined and came into popular use.
 
 - [A Short History Of ChatGPT: How We Got To Where We Are Today (Forbes, May 19, 2023)](https://www.forbes.com/sites/bernardmarr/2023/05/19/a-short-history-of-chatgpt-how-we-got-to-where-we-are-today/)
   
