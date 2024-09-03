@@ -82,7 +82,7 @@ couple of weeks have convinced me the honor may belong to something else: Open A
   > A publicly available, pre-trained, larege language model that can be hosted on our own compute platform
 
 - [Ollama](https://ollama.com/)
-  > A software framework we can use to interact with open-source models.
+  > An open-source, software framework  that makes it easier to run large language models (LLMs) on a local computer through the use of Modelfiles.
 
 - [Open WebUI](https://docs.openwebui.com/)
   > An extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline.
