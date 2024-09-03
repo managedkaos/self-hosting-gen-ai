@@ -26,6 +26,10 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
 - [A new AI chatbot might do your homework for you. But it's still not an A+ student (NPR, December 19, 2022)](https://www.npr.org/2022/12/19/1143912956/chatgpt-ai-chatbot-homework-academia)
 
+  > After the developer OpenAI released the text-based system to the public last month, some educators have been sounding the alarm about the potential that such AI systems have to transform academia, for better and worse.
+  >
+  > "AI has basically ruined homework," said Ethan Mollick, a professor at the University of Pennsylvania's Wharton School of Business.
+
 ### 2023
 
 - [On ChatGPT’s one-year anniversary, it has more than 1.7 billion users—here’s what it may do next (CNBC, November 30, 2023)](https://www.cnbc.com/2023/11/30/chatgpts-one-year-anniversary-how-the-viral-ai-chatbot-has-changed.html)
