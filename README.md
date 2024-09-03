@@ -73,8 +73,8 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 # The Process
 
 1. Tools
-2. Research
-3. Deployments
+2. Experiment
+3. Deploy
 
 ## 1. Tools
 
@@ -86,6 +86,10 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
 - [Open Web UI](https://docs.openwebui.com/)
   > Open WebUI is an extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline. It supports various LLM runners, including Ollama and OpenAI-compatible APIs.
+
+- Compute platform
+  > A system where we will host the model
+  > Could be a laptop or a GPU enabled cloud-based server
 
 ### Researching Models
 
@@ -111,7 +115,6 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - Mac
 - Windows
 - Linux
-
 
 ## Installing Ollama and Openeb Web UI on a Cloud Server _(With Demonstration)_
 
