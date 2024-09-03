@@ -79,18 +79,17 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 ## 1. Tools
 
 - [An Open-Source Foundation Model](./1-MODELS.md)
-  > Defining the terms "foundation model" and "open-source foundation model"
+  > A publicly available, pre-trained, larege language model that can be hosted on our own compute platform
 
 - [Ollama](https://ollama.com/)
-  > Get up and running with large language models.
+  > A software framework we can use to interact with open-source models.
 
-- [Open Web UI](https://docs.openwebui.com/)
-  > Open WebUI is an extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline. It supports various LLM runners, including Ollama and OpenAI-compatible APIs.
+- [Open WebUI](https://docs.openwebui.com/)
+  > An extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline.
 
 - Compute platform
-  > A system where we will host the model
-  > Could be a laptop or a GPU enabled cloud-based server
-
+  > The CPU or GPU enabled systems where models, Ollama, and Open WebUI will run
+  
 ### Researching Models
 
 - [Ollama Model Library](https://ollama.com/library)
