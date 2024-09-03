@@ -70,31 +70,30 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
 - [The tricky truth about how generative AI uses your data (Vox, July 27, 2023)](https://www.vox.com/technology/2023/7/27/23808499/ai-openai-google-meta-data-privacy-nope)
 
-  > 
+# The Process
 
+1. Tools
+2. Research
+3. Deployments
 
+## 1. Tools
 
-## Glossary of Terms
+- [An Open-Source Foundation Model](./1-MODELS.md)
+  > Defining the terms "foundation model" and "open-source foundation model"
 
-| **Metric** | **Description** |
-| --- | --- |
-| GPT | Generative Pre-trained Transformer |
-| LLM | Large Language Model |
-| FM | Foundation Model |
-| Token | Smallest unit of text used in processing prompts and generating responses (~4 characters) |
-| Context length (or context window) | Maximum amount of information an LLM can take as input for a query |
-| Latency (ms) | Amount of time the FM uses to generate each token in a sequence |
-| Input token count | Number of input tokens used by the FM during inference |
-| Output token count | Number of tokens generated in a response by an FM |
-| Time to first token | Amount of time between the client's request being received and the first token sent in response |
-| Tokens per second | Rate at which the model is able to generate a response |
+- [Ollama](https://ollama.com/)
+  > Get up and running with large language models.
 
-## The Introduction of Public Foundation Models
+- [Open Web UI](https://docs.openwebui.com/)
+  > Open WebUI is an extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline. It supports various LLM runners, including Ollama and OpenAI-compatible APIs.
 
 ### Researching Models
-- Ollama Model Library
-- Parameters
-- Sizes
+
+- [Ollama Model Library](https://ollama.com/library)
+
+  > A collection of open-source FMs that are compatiable with the Ollama hosting environment.
+
+  _Keep in mind the number of parameters used to train the model and how this affects the model's size in GB.  Generally speaking, the more parameters used to train the model, the larger the model will be.  Consider ~5 GB for 8 Billion parameters._
 
 ### Model Playgrounds
 - Cloudflare
