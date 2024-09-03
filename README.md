@@ -56,7 +56,19 @@ couple of weeks have convinced me the honor may belong to something else: Open A
   > AI Business Impacts: 43% of businesses are concerned about technology dependence
   > Forty-three percent of businesses are concerned about technology dependence, and an additional **35% worry about having the technical skills to use AI effectively. These concerns highlight the challenges that organizations face while adopting AI technologies.**
 
-## Privacy Needs for Individuals and Businesses
+## Privacy Concerns for Individuals and Businesses
+
+- [How your data is used to improve model performance (OpenAI)](https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance)
+
+  > When you use our services for individuals such as ChatGPT or DALL•E, we may use your content to train our models.
+  > 
+  > We don’t use content from our business offerings such as ChatGPT Team, ChatGPT Enterprise, and our API Platform to train our models. Please see our Enterprise Privacy page for information on how we handle business data. 
+
+- [The tricky truth about how generative AI uses your data (Vox, July 27, 2023)](https://www.vox.com/technology/2023/7/27/23808499/ai-openai-google-meta-data-privacy-nope)
+
+  > 
+
+
 
 ## Glossary of Terms
 
