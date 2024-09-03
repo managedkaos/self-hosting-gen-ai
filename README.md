@@ -73,7 +73,7 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 # The Process
 
 1. Tools
-2. Experiment
+2. Research & Experiment
 3. Deploy
 
 ## 1. Tools
