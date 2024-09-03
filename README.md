@@ -99,8 +99,15 @@ couple of weeks have convinced me the honor may belong to something else: Open A
   _Keep in mind the number of parameters used to train the model and how this affects the model's size in GB.  Generally speaking, the more parameters used to train the model, the larger the model will be.  Consider ~5 GB for 8 Billion parameters._
 
 ### Model Playgrounds
-- Cloudflare
-- [Caylent Battleground](https://battleground.caylent.com/chat)
+- [Cloudflare Workers AI LLM Playground](https://playground.ai.cloudflare.com/)
+  > Explore different Text Generation models by drafting messages and fine-tuning your responses.
+  > Free, no registration
+
+- [Caylent AI Battleground](https://battleground.caylent.com/chat)
+  > Compare models by examining their performance
+  > Free, requires registration
+
+- Others?
 
 ## Ollama and Open Web UI
 
