@@ -9,6 +9,13 @@
 
 ## The Rise of Generative Artificial Intelligence
 
+### 2015
+
+- [A Short History Of ChatGPT: How We Got To Where We Are Today (Forbes, May 19, 2023)](https://www.forbes.com/sites/bernardmarr/2023/05/19/a-short-history-of-chatgpt-how-we-got-to-where-we-are-today/)
+  
+  > OpenAI was founded in December 2015 by Sam Altman, Greg Brockman, Elon Musk, Ilya Sutskever, Wojciech Zaremba, and John Schulman. The founding team combined their diverse expertise in technology entrepreneurship, machine learning, and software engineering to create an organization focused on advancing artificial intelligence in a way that benefits humanity.
+
+
 ### 2022
 - [Introducing ChatGPT, (OpenAI, November 30, 2022)](https://openai.com/index/chatgpt/)
 
@@ -41,6 +48,13 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - [The Year of ChatGPT and Living Generatively (Wired, December 1, 2023)](https://www.wired.com/story/plaintext-chatgpt-year-of-living-generatively/)
 
   > In November last year, OpenAl launched a "low key research preview" called ChatGPT. What happened next transformed the tech industry-and perhaps humanity's future.
+
+### 2024
+
+- [24 Top AI Statistics And Trends In 2024 (Forbes, Jun 15, 2024)](https://www.forbes.com/advisor/business/ai-statistics/)
+
+  > AI Business Impacts: 43% of businesses are concerned about technology dependence
+  > Forty-three percent of businesses are concerned about technology dependence, and an additional **35% worry about having the technical skills to use AI effectively. These concerns highlight the challenges that organizations face while adopting AI technologies.**
 
 ## Privacy Needs for Individuals and Businesses
 
