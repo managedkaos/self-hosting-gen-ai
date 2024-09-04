@@ -1,0 +1,425 @@
+Description: EC2 Server with Nvidia Tesla GPU running Ollama and Open Web UI.  An EFS filesystem is attached to persist the Open Web UI volume.
+
+
+Parameters:
+  DomainName:
+    Type: String
+    Description: The fully qualified domain name to create
+
+
+  HostedZoneId:
+    Type: AWS::Route53::HostedZone::Id
+    Description: The ID of an existing Route 53 hosted zone
+
+
+  SSLCertificateArn:
+    Type: String
+    Description: The ARN of an existing ACM certificate created for the hosted zone
+
+
+  OllamaInstanceType:
+    Type: String
+    Description: The size and type to use for the EC2 instance. Must be NVIDIA TESLA GPU instance type.
+    Default: g4dn.xlarge
+    AllowedValues:
+      - g4dn.xlarge
+      - g4dn.2xlarge
+      - g4dn.4xlarge
+      - g4dn.8xlarge
+      - g4dn.16xlarge
+    ConstraintDescription: Must be a valid EC2 instance type.
+
+
+  VpcId:
+    Description: The VPC to use for this deployment.
+    Type: AWS::EC2::VPC::Id
+    ConstraintDescription: Must be a valid VPC.
+
+
+  Subnet0:
+    Description: A subnet; must belong to the selected VPC.
+    Type: AWS::EC2::Subnet::Id
+
+
+  Subnet1:
+    Description: A subnet; must belong to the selected VPC.
+    Type: AWS::EC2::Subnet::Id
+
+
+  Subnet2:
+    Description: A subnet; must belong to the selected VPC.
+    Type: AWS::EC2::Subnet::Id
+
+  Subnet3:
+      Description: A subnet; must belong to the selected VPC.
+      Type: AWS::EC2::Subnet::Id
+
+
+Resources:
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: [ec2.amazonaws.com]
+            Action: ['sts:AssumeRole']
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM
+
+
+  Profile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles: [!Ref Role]
+
+
+  OllamaSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow TCP traffic on port 8080
+      VpcId: !Ref VpcId
+
+
+  OllamaSecurityGroupIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !Ref OllamaSecurityGroup
+      IpProtocol: tcp
+      FromPort: 8080
+      ToPort: 8080
+      SourceSecurityGroupId: !Ref AlbSecurityGroup
+
+
+  EC2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow traffic within the VPC
+      VpcId: !Ref VpcId
+
+
+  FileSystemSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow TCP traffic on port 2049
+      VpcId: !Ref VpcId
+
+
+  FileSystemSecurityGroupIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !Ref FileSystemSecurityGroup
+      IpProtocol: tcp
+      FromPort: 2049
+      ToPort: 2049
+      SourceSecurityGroupId: !Ref EC2SecurityGroup
+
+
+  AlbSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: Allow HTTP and HTTPS traffic
+      VpcId: !Ref VpcId
+
+
+  AlbSecurityGroupHttpIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !Ref AlbSecurityGroup
+      IpProtocol: tcp
+      FromPort: 80
+      ToPort: 80
+      CidrIp: 0.0.0.0/0
+
+
+  AlbSecurityGroupHttpsIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !Ref AlbSecurityGroup
+      IpProtocol: tcp
+      FromPort: 443
+      ToPort: 443
+      CidrIp: 0.0.0.0/0
+
+
+  FileSystem:
+    Type: AWS::EFS::FileSystem
+    Properties:
+      Encrypted: true
+      PerformanceMode: generalPurpose
+      ThroughputMode: bursting
+
+
+  MountTarget0:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref FileSystem
+      SubnetId: !Ref Subnet0
+      SecurityGroups:
+        - !Ref FileSystemSecurityGroup
+
+
+  MountTarget1:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref FileSystem
+      SubnetId: !Ref Subnet1
+      SecurityGroups:
+        - !Ref FileSystemSecurityGroup
+
+
+  MountTarget2:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref FileSystem
+      SubnetId: !Ref Subnet2
+      SecurityGroups:
+        - !Ref FileSystemSecurityGroup
+
+
+  MountTarget3:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref FileSystem
+      SubnetId: !Ref Subnet3
+      SecurityGroups:
+        - !Ref FileSystemSecurityGroup
+
+
+  DNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Ref DomainName
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt ApplicationLoadBalancer.CanonicalHostedZoneID
+        DNSName: !GetAtt ApplicationLoadBalancer.DNSName
+
+
+  ApplicationLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub ${AWS::StackName}
+      Scheme: internet-facing
+      SecurityGroups:
+        - !Ref AlbSecurityGroup
+      Subnets:
+        - !Ref Subnet0
+        - !Ref Subnet1
+        - !Ref Subnet2
+        - !Ref Subnet3
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: '60'
+
+  
+  HttpListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: redirect
+          RedirectConfig:
+            Protocol: HTTPS
+            Port: '443'
+            StatusCode: HTTP_301
+      LoadBalancerArn: !Ref ApplicationLoadBalancer
+      Port: 80
+      Protocol: HTTP
+
+
+  HttpsListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      Certificates:
+        - CertificateArn: !Ref SSLCertificateArn
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+      LoadBalancerArn: !Ref ApplicationLoadBalancer
+      Port: 443
+      Protocol: HTTPS
+
+
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: !Sub ${AWS::StackName}
+      Port: 8080
+      Protocol: HTTP
+      VpcId: !Ref VpcId
+      HealthCheckPath: /health
+      Matcher:
+        HttpCode: 200
+      Targets:
+        - Id: !Ref OllamaServer0
+
+
+  OllamaServer0:
+    Type: AWS::EC2::Instance
+
+    CreationPolicy:
+      ResourceSignal:
+        Timeout: PT15M
+
+    Metadata:
+      'AWS::CloudFormation::Init':
+        configSets:
+          application_installation:
+            - install_cfn
+            - install_apps
+        install_cfn:
+          files:
+            /etc/systemd/system/open-webui.service:
+              content: |
+                [Unit]
+                Description=Open Web UI
+                [Service]
+                ExecStart=/usr/bin/docker start open-webui
+                Environment="OLLAMA_BASE_URL=http://localhost:11434"
+                Restart=on-failure
+                [Install]
+                WantedBy=multi-user.target
+              mode: '000400'
+              owner: root
+              group: root
+
+            /etc/cfn/cfn-hup.conf:
+              content: !Sub |
+                [main]
+                stack=${AWS::StackId}
+                region=${AWS::Region}
+              mode: '000400'
+              owner: root
+              group: root
+
+            /etc/cfn/hooks.d/cfn-auto-reloader.conf:
+              content: !Sub |
+                [cfn-auto-reloader-hook]
+                triggers=post.update
+                path=Resources.OllamaServer0.Metadata.AWS::CloudFormation::Init
+                action=/opt/aws/bin/cfn-init -v
+                      --stack ${AWS::StackName}
+                      --resource OllamaServer0
+                      --configsets application_installation
+                      --region ${AWS::Region}
+              mode: '000400'
+              owner: root
+              group: root
+
+          services:
+            sysvinit:
+              cfn-hup:
+                enabled: 'true'
+                ensureRunning: 'true'
+                files:
+                  - /etc/cfn/cfn-hup.conf
+                  - /etc/cfn/hooks.d/cfn-auto-reloader.conf
+
+        install_apps:
+          packages:
+            yum:
+              docker: []
+              amazon-efs-utils: []
+          services:
+            sysvinit:
+              docker:
+                enabled: 'true'
+                ensureRunning: 'true'
+
+    Properties:
+      InstanceType: !Ref OllamaInstanceType
+
+      ImageId: "{{resolve:ssm:/aws/service/marketplace/prod-sv2ifwvpp52d4/2.0.20240620.0}}"
+
+      IamInstanceProfile: !Ref Profile
+
+      SecurityGroupIds:
+        - !Ref OllamaSecurityGroup
+        - !Ref EC2SecurityGroup
+
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}
+
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeType: gp3
+            VolumeSize: 500
+            DeleteOnTermination: true
+            Encrypted: false
+
+      UserData:
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            exec > >(tee /var/log/user-data.log) 2>&1
+
+            yum update -y aws-cfn-bootstrap
+
+            /opt/aws/bin/cfn-init -v \
+              --stack ${AWS::StackName} \
+              --region ${AWS::Region} \
+              --resource OllamaServer0 \
+              --configsets application_installation
+
+            curl -fsSL https://ollama.com/install.sh | sh
+
+            docker volume create --driver local \
+              --opt type=nfs \
+              --opt o=addr=${FileSystem}.efs.${AWS::Region}.amazonaws.com,rw,nfsvers=4 \
+              --opt device=:/ \
+              open-webui
+
+            docker run --detach \
+              --network="host" \
+              --mount source=open-webui,target=/app/backend/data \
+              --env OLLAMA_BASE_URL=http://localhost:11434 \
+              --restart always \
+              --name open-webui \
+              ghcr.io/open-webui/open-webui:main
+
+            systemctl daemon-reload
+            systemctl enable open-webui
+            systemctl start ollama
+            systemctl enable ollama
+
+            /opt/aws/bin/cfn-signal -e $? \
+              --stack ${AWS::StackName} \
+              --region ${AWS::Region} \
+              --resource OllamaServer0
+
+            ollama pull llama3.1
+            
+            mkdir /mnt/open-webui
+            
+            echo -e "$(date)\n\nIf you are seeing this message, you are viewing the local disk, not EFS.\n\n" > \
+              /mnt/open-webui/this-is-the-local-disk-not-the-efs-disk.txt
+            
+            cp -v /etc/fstab "/root/fstab.$(date +%F-%s).txt"
+            
+            echo "${FileSystem} /mnt/open-webui efs _netdev,tls 0 0" >> /etc/fstab
+
+            mount -a
+            
+
+
+  ElasticIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceId: !Ref OllamaServer0
+
+
+Outputs:
+  ApplicationUrl:
+    Value: !GetAtt ApplicationLoadBalancer.DNSName
+    Description: Follow this URL to accesss the Open WebUI application
+
+
+  ServerUrl:
+    Value: !Sub "https://${AWS::Region}.console.aws.amazon.com/ec2/home?region=${AWS::Region}#ConnectToInstance:instanceId=${OllamaServer0}"
+    Description: Follow this URL to open a terminal on the server where Open WebUI is running

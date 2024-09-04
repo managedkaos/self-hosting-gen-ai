@@ -1,0 +1,197 @@
+Description: EC2 Server with Nvidia Tesla GPU running Ollama and Open Web UI.
+
+
+Parameters:
+  OllamaInstanceType:
+    Type: String
+    Description: The size and type to use for the EC2 instance. Must be NVIDIA TESLA GPU instance type.
+    Default: g4dn.xlarge
+    AllowedValues:
+      - g4dn.xlarge
+      - g4dn.2xlarge
+      - g4dn.4xlarge
+      - g4dn.8xlarge
+      - g4dn.16xlarge
+    ConstraintDescription: Must be a valid EC2 instance type.
+
+
+Resources:
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: [ec2.amazonaws.com]
+            Action: ['sts:AssumeRole']
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM
+
+
+  Profile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles: [!Ref Role]
+
+
+  OllamaSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Allow TCP traffic on port 8080
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+
+
+  OllamaServer0:
+    Type: AWS::EC2::Instance
+
+    CreationPolicy:
+      ResourceSignal:
+        Timeout: PT15M
+
+    Metadata:
+      'AWS::CloudFormation::Init':
+        configSets:
+          application_installation:
+            - install_cfn
+            - install_apps
+        install_cfn:
+          files:
+            /etc/systemd/system/open-webui.service:
+              content: |
+                [Unit]
+                Description=Open Web UI
+                [Service]
+                ExecStart=/usr/bin/docker start open-webui
+                Environment="OLLAMA_BASE_URL=http://localhost:11434"
+                Restart=on-failure
+                [Install]
+                WantedBy=multi-user.target
+              mode: '000400'
+              owner: root
+              group: root
+
+            /etc/cfn/cfn-hup.conf:
+              content: !Sub |
+                [main]
+                stack=${AWS::StackId}
+                region=${AWS::Region}
+              mode: '000400'
+              owner: root
+              group: root
+
+            /etc/cfn/hooks.d/cfn-auto-reloader.conf:
+              content: !Sub |
+                [cfn-auto-reloader-hook]
+                triggers=post.update
+                path=Resources.OllamaServer0.Metadata.AWS::CloudFormation::Init
+                action=/opt/aws/bin/cfn-init -v
+                      --stack ${AWS::StackName}
+                      --resource OllamaServer0
+                      --configsets application_installation
+                      --region ${AWS::Region}
+              mode: '000400'
+              owner: root
+              group: root
+
+          services:
+            sysvinit:
+              cfn-hup:
+                enabled: 'true'
+                ensureRunning: 'true'
+                files:
+                  - /etc/cfn/cfn-hup.conf
+                  - /etc/cfn/hooks.d/cfn-auto-reloader.conf
+
+        install_apps:
+          packages:
+            yum:
+              docker: []
+          services:
+            sysvinit:
+              docker:
+                enabled: 'true'
+                ensureRunning: 'true'
+
+    Properties:
+      InstanceType: !Ref OllamaInstanceType
+
+      ImageId: "{{resolve:ssm:/aws/service/marketplace/prod-sv2ifwvpp52d4/2.0.20240620.0}}"
+
+      IamInstanceProfile: !Ref Profile
+
+      SecurityGroupIds:
+        - !Ref OllamaSecurityGroup
+
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}
+
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeType: gp3
+            VolumeSize: 500
+            DeleteOnTermination: true
+            Encrypted: false
+
+      UserData:
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            exec > >(tee /var/log/user-data.log) 2>&1
+
+            yum update -y aws-cfn-bootstrap
+
+            /opt/aws/bin/cfn-init -v \
+              --stack ${AWS::StackName} \
+              --region ${AWS::Region} \
+              --resource OllamaServer0 \
+              --configsets application_installation
+
+            curl -fsSL https://ollama.com/install.sh | sh
+
+            docker volume create open-webui
+
+            docker run --detach \
+              --network="host" \
+              --volume open-webui:/app/backend/data \
+              --env OLLAMA_BASE_URL=http://localhost:11434 \
+              --restart always \
+              --name open-webui \
+              ghcr.io/open-webui/open-webui:main
+
+            systemctl daemon-reload
+            systemctl enable open-webui
+            systemctl start ollama
+            systemctl enable ollama
+
+            /opt/aws/bin/cfn-signal -e $? \
+              --stack ${AWS::StackName} \
+              --region ${AWS::Region} \
+              --resource OllamaServer0
+            
+            ollama pull llama3.1
+
+
+  ElasticIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceId: !Ref OllamaServer0
+
+
+Outputs:
+  ApplicationUrl:
+    Value: !Sub 'http://${OllamaServer0.PublicDnsName}:8080/'
+    Description: Follow this URL to accesss the Open WebUI application
+
+
+  ServerUrl:
+    Value: !Sub "https://${AWS::Region}.console.aws.amazon.com/ec2/home?region=${AWS::Region}#ConnectToInstance:instanceId=${OllamaServer0}"
+    Description: Follow this URL to open a terminal on the server where Open WebUI is running

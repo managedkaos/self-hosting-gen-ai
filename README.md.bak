@@ -28,7 +28,7 @@
   > Birth of AI: 1950-1956: Alan Turing published his work “Computer Machinery and Intelligence” which eventually became The Turing Test, which experts used to measure computer intelligence. The term “artificial intelligence” was coined and came into popular use.
 
 - [A Short History Of ChatGPT: How We Got To Where We Are Today (Forbes, May 19, 2023)](https://www.forbes.com/sites/bernardmarr/2023/05/19/a-short-history-of-chatgpt-how-we-got-to-where-we-are-today/)
-
+  
   > OpenAI was founded in December 2015 by Sam Altman, Greg Brockman, Elon Musk, Ilya Sutskever, Wojciech Zaremba, and John Schulman. The founding team combined their diverse expertise in technology entrepreneurship, machine learning, and software engineering to create an organization focused on advancing artificial intelligence in a way that benefits humanity.
 
 
@@ -38,7 +38,7 @@
   > We’ve trained a model called ChatGPT which interacts in a conversational way. The dialogue format makes it possible for ChatGPT to answer followup questions, admit its mistakes, challenge incorrect premises, and reject inappropriate requests.
   >
   > ChatGPT is a sibling model to InstructGPT, which is trained to follow an instruction in a prompt and provide a detailed response.
-  >
+  > 
   > We are excited to introduce ChatGPT to get users’ feedback and learn about its strengths and weaknesses. During the research preview, usage of ChatGPT is free. Try it now at chatgpt.com(opens in a new window).
 
 - [The advent of OpenAI’s ChatGPT may be the most important news event of 2022 (Forbes, December 12, 2022)](https://fortune.com/2022/12/12/openai-chatgpt-biggest-news-event-of-2022/)
@@ -58,12 +58,12 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - [On ChatGPT’s one-year anniversary, it has more than 1.7 billion users—here’s what it may do next (CNBC, November 30, 2023)](https://www.cnbc.com/2023/11/30/chatgpts-one-year-anniversary-how-the-viral-ai-chatbot-has-changed.html)
 
   > Over the past year, people have used ChatGPT for all sorts of tasks, from writing emails to sprucing up resumes to even creating a six-figure business.
-  >
+  > 
   > As the ways people utilize the AI chatbot have changed, the technology itself has evolved too.
 
 - [The Year of ChatGPT and Living Generatively (Wired, December 1, 2023)](https://www.wired.com/story/plaintext-chatgpt-year-of-living-generatively/)
 
-  > In November last year, OpenAI launched a "low key research preview" called ChatGPT. What happened next transformed the tech industry-and perhaps humanity's future.
+  > In November last year, OpenAl launched a "low key research preview" called ChatGPT. What happened next transformed the tech industry-and perhaps humanity's future.
 
 ### 2024
 
@@ -77,8 +77,8 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - [How your data is used to improve model performance (OpenAI)](https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance)
 
   > When you use our services for individuals such as ChatGPT or DALL•E, we may use your content to train our models.
-  >
-  > We don’t use content from our business offerings such as ChatGPT Team, ChatGPT Enterprise, and our API Platform to train our models. Please see our Enterprise Privacy page for information on how we handle business data.
+  > 
+  > We don’t use content from our business offerings such as ChatGPT Team, ChatGPT Enterprise, and our API Platform to train our models. Please see our Enterprise Privacy page for information on how we handle business data. 
 
 - [The tricky truth about how generative AI uses your data (Vox, July 27, 2023)](https://www.vox.com/technology/2023/7/27/23808499/ai-openai-google-meta-data-privacy-nope)
 
@@ -92,7 +92,7 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
 - [An Open-Source Foundation Model](./1-MODELS.md)
 
-  > A publicly available, pre-trained, large language model that can be hosted on our own compute platform
+  > A publicly available, pre-trained, larege language model that can be hosted on our own compute platform
 
 - [Ollama](https://ollama.com/)
 
@@ -105,12 +105,12 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - Compute platform
 
   > The CPU or GPU enabled systems where models, Ollama, and Open WebUI will run
-
+  
 ## 2. Research and Experiment
 
 - [Ollama Model Library](https://ollama.com/library)
 
-  > A collection of open-source FMs that are compatible with the Ollama hosting environment.
+  > A collection of open-source FMs that are compatiable with the Ollama hosting environment.
 
   _Keep in mind the number of parameters used to train the model and how this affects the model's size in GB.  Generally speaking, the more parameters used to train the model, the larger the model will be.  Consider ~5 GB for 8 Billion parameters._
 
@@ -118,11 +118,11 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - [Cloudflare Workers AI LLM Playground](https://playground.ai.cloudflare.com/)
 
   > Free, no registration required
-  >
+  > 
   > Explore different Text Generation models.
   >
   > [Documentation](https://developers.cloudflare.com/workers-ai/models/) is useful for learning more about models and their capabilities.
-
+  
   ![Cloudflare Workers AI LLM Playground](images/cloudflare-workers-ai-playground-SCR-20240904-mjtv.png)
 
 - [Caylent AI Battleground](https://battleground.caylent.com/chat)
@@ -130,7 +130,7 @@ couple of weeks have convinced me the honor may belong to something else: Open A
   **_I really like this playground but it was generating errors during the last time I tested it (2024-09-04) (MJ)_**
 
   > Free, requires registration
-  >
+  > 
   > Compare models by examining their performance
 
 - Others?
@@ -151,7 +151,7 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
   - Summarize online meeting transcripts
   - Suggest the content for emails, articles, etc. given the context and audience
-
+ 
 **Note and Experiment with the controls including:**
 
 - System Message
@@ -162,7 +162,7 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
   > Controls the maximum number of tokens that the AI system can generate in a single response. By limiting the maximum output length, the system can prevent truncation of the output or allow more space for long responses.
   >
-  > _Note: If the response is truncated, use `continue` as the next prompt and optionally increase Maximum Output Length.  The model should continue responding to the initial prompt._
+  > _Note: If the reponse is truncated, use `continue` as the next prompt and optionally increase Maximum Output Length.  The model should continue responding to the initial prompt._
 
 - Temperature
 
@@ -173,11 +173,11 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - Pros and Upsides
 - Cons and Downsides
 
-### Ollama
+### Ollama 
 
 [Official installation instructions](https://ollama.com/download)
 
-- macOS: [Use the Brew package manager for easy installation.](https://formulae.brew.sh/formula/ollama)
+- macOS: [Use the Brew pacakage manager for easy installation.](https://formulae.brew.sh/formula/ollama)
 - Linux: One-line install `curl -fsSL https://ollama.com/install.sh | sh`
 - Windows: Currently in preview; Suggest using [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install)) and then use the Linux installation method
 
@@ -215,7 +215,7 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - Linux
 - Windows (Using [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install))
 
-### Installing Ollama and Open Web UI on a Cloud Server _(With Demonstration)_
+### Installing Ollama and Openeb Web UI on a Cloud Server _(With Demonstration)_
 
 #### Hardware and Operating System Requirements
 - CPU/GPU, RAM, and Disk
