@@ -106,7 +106,7 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
   > The CPU or GPU enabled systems where models, Ollama, and Open WebUI will run
   
-### Researching Models
+## 2. Research and Experiment
 
 - [Ollama Model Library](https://ollama.com/library)
 
@@ -164,12 +164,16 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
   > Controls the randomness and/or creativity of the output. Lower temperatures provide less random output.  Higher temperatures provide output that is more random.  The temperature is related to the concept of [Boltzmann temperature in statistical mechanics](https://en.wikipedia.org/wiki/Boltzmann_distribution), where a higher temperature corresponds to more random and exploratory sampling from the probability distribution.
 
-## Ollama and Open Web UI
+## 3. Deploy
 
-### Pros and Upsides
-### Cons and Downsides
+- Pros and Upsides
+- Cons and Downsides
 
-## Installing Ollama and Open Web UI on a Laptop _(With Demonstration)_
+### Ollama 
+
+### Open Web UI
+
+### Installing Ollama and Open Web UI on a Laptop _(With Demonstration)_
 
 ### Hardware and Operating System Requirements
 - CPU/GPU, RAM, and Disk
@@ -177,19 +181,19 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - Windows
 - Linux
 
-## Installing Ollama and Openeb Web UI on a Cloud Server _(With Demonstration)_
+### Installing Ollama and Openeb Web UI on a Cloud Server _(With Demonstration)_
 
 ### Hardware and Operating System Requirements
 - CPU/GPU, RAM, and Disk
-- LInux
+- Linux
 - AMI Selection
 - Costs
 
-## Advanced Hosting in the Cloud _(With Demonstration)_
+### Advanced Hosting in the Cloud _(With Demonstration)_
 
 ### Hardware and Operating System Requirements
 - CPU/GPU, RAM, and Disk
-- LInux
+- Linux
 - AMI Selection
 - Multiple Servers (For high availability and advanced model support)
 - Hosted Zone
