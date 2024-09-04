@@ -140,6 +140,10 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 - Explain and demonstrate well known algorithms and theorems that can be expressed as code.
 
   ```
+  Describe the Fibonnacci sequence and use Python code for a practical example.
+  ```
+
+  ```
   Explain the Pythagorean theorem and provide a demonstration using Python.
   ```
 
