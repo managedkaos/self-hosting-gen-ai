@@ -1,13 +1,25 @@
 # From Laptop to Cloud: Self-Hosting Gen AI for Privacy and Performance
 
+**What’s the history of generative artificial intelligence and how does it work?**
+
+- TLDR…
+  - Math
+  - Front-end application for human interface
+  - Back-end application for model management
+  - Back-end providers have EULA which may include access to requests and responses
+
+**OK. As technologists, how can we own the use and management of generative AI infrastructure today and in the future?**
+
+- [Let's get started](#A-Process-for-Self-Hosting-Generative-AI)
+
+## The Rise of Generative Artificial Intelligence
+
 |Role|Input/Response|
 | --- | --- |
 |**User**| help me complete the following sentence: "In the fall of 2022, OpenAI introduced ..."|
 |**System**| "In the fall of 2022, OpenAI introduced ChatGPT, a powerful language model that quickly gained popularity for its ability to generate human-like text and assist with a wide range of tasks, from casual conversation to technical problem-solving."|
 |**User**| that's you, right?|
 |**System**| Yes, that's me! I'm ChatGPT, a language model developed by OpenAI, introduced in the fall of 2022. My purpose is to assist with a wide variety of tasks, including answering questions, providing explanations, generating creative content, and more.|
-
-## The Rise of Generative Artificial Intelligence
 
 ### 1950 - 2015
 
@@ -70,7 +82,7 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
 - [The tricky truth about how generative AI uses your data (Vox, July 27, 2023)](https://www.vox.com/technology/2023/7/27/23808499/ai-openai-google-meta-data-privacy-nope)
 
-# The Process
+# A Process for Self-Hosting Generative AI
 
 1. Tools
 2. Research & Experiment
