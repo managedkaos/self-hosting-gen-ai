@@ -171,30 +171,58 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
 ### Ollama 
 
+[Official installation instructions](https://ollama.com/download)
+
+- macOS: [Use the Brew pacakage manager for easy installation.](https://formulae.brew.sh/formula/ollama)
+- Linux: One-line install `curl -fsSL https://ollama.com/install.sh | sh`
+- Windows: Currently in preview; Suggest using [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install)) and then use the Linux installation method
+
 ### Open Web UI
+
+[Official installation instructions](https://docs.openwebui.com/getting-started/)
+
+- Use [Docker](https://www.docker.com/) to run the Open WebUI image as a container.
+
+  Supports managing the process as a service.
+
+  ```
+  if [ ! -d $(OPEN_WEBUI_HOME)/data ]; then mkdir -p $(OPEN_WEBUI_HOME)/data; fi
+
+	docker run --detach \
+		--network="host" \
+		--volume $(OPEN_WEBUI_HOME)/data:/app/backend/data \
+		--env PORT=9595 \
+		--env OLLAMA_BASE_URL=http://localhost:11434 \
+		--restart always \
+		--name open-webui \
+		ghcr.io/open-webui/open-webui:main || \
+	printf "http://localhost:9595\n\n"
+
+  ```
+
+- Use [Docker](https://www.docker.com/) to run the Open WebUI image as a container.
+
 
 ### Installing Ollama and Open Web UI on a Laptop _(With Demonstration)_
 
-### Hardware and Operating System Requirements
+#### Hardware and Operating System Requirements
 - CPU/GPU, RAM, and Disk
-- Mac
-- Windows
+- macOS
 - Linux
+- Windows (Using [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install))
 
 ### Installing Ollama and Openeb Web UI on a Cloud Server _(With Demonstration)_
 
-### Hardware and Operating System Requirements
+#### Hardware and Operating System Requirements
 - CPU/GPU, RAM, and Disk
-- Linux
-- AMI Selection
+- Linux using Amazon Machine Image ([Amazon Linux 2 AMI with NVIDIA TESLA GPU Driver Info](https://aws.amazon.com/marketplace/pp/prodview-64e4rx3h733ru?sr=0-1&ref_=beagle&applicationId=AWSMPContessa))
 - Costs
 
 ### Advanced Hosting in the Cloud _(With Demonstration)_
 
-### Hardware and Operating System Requirements
+#### Hardware and Operating System Requirements
 - CPU/GPU, RAM, and Disk
-- Linux
-- AMI Selection
+- Linux using Amazon Machine Image ([Amazon Linux 2 AMI with NVIDIA TESLA GPU Driver Info](https://aws.amazon.com/marketplace/pp/prodview-64e4rx3h733ru?sr=0-1&ref_=beagle&applicationId=AWSMPContessa))
 - Multiple Servers (For high availability and advanced model support)
 - Hosted Zone
 - SSL Certificates
