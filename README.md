@@ -79,15 +79,19 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 ## 1. Tools
 
 - [An Open-Source Foundation Model](./1-MODELS.md)
+
   > A publicly available, pre-trained, larege language model that can be hosted on our own compute platform
 
 - [Ollama](https://ollama.com/)
+
   > An open-source, software framework  that makes it easier to run large language models (LLMs) on a local computer through the use of Modelfiles.
 
 - [Open WebUI](https://docs.openwebui.com/)
+
   > An extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline.
 
 - Compute platform
+
   > The CPU or GPU enabled systems where models, Ollama, and Open WebUI will run
   
 ### Researching Models
@@ -99,15 +103,54 @@ couple of weeks have convinced me the honor may belong to something else: Open A
   _Keep in mind the number of parameters used to train the model and how this affects the model's size in GB.  Generally speaking, the more parameters used to train the model, the larger the model will be.  Consider ~5 GB for 8 Billion parameters._
 
 ### Model Playgrounds
+
 - [Cloudflare Workers AI LLM Playground](https://playground.ai.cloudflare.com/)
+
   > Explore different Text Generation models by drafting messages and fine-tuning your responses.
   > Free, no registration
 
 - [Caylent AI Battleground](https://battleground.caylent.com/chat)
+
+  **_I really like this playground but it was generating errors during the last time I tested it (2024-09-04) (MJ)_**
+
   > Compare models by examining their performance
   > Free, requires registration
+  > **_I really like this playground but it was generating errors during the last time I tested it (2024-09-04) (MJ)_**
 
 - Others?
+
+**Experiment with a variety of prompts including:**
+
+- Explain and demonstrate well known algorithms and theorems that can be expressed as code.
+
+  ```
+  Explain the Pythagorean theorem and provide a demonstration using Python.
+  ```
+
+  ```
+  Describe how Shakespeare's most influential plays have been adapted into films.
+  ```
+
+- Analyze or process transcripts and other human generated content.
+
+  - Summarize online meeting transcripts
+  - Suggest the content for emails, articles, etc. given the context and audience
+ 
+**Note and Experiment with the controls including:**
+
+- System Message
+
+  > Provides a role for the model and controls how the AI system handles the output when it encounters an error or an issue that prevents it from generating a response.
+
+- Maximum Output Length (Tokens)
+
+  > Controls the maximum number of tokens that the AI system can generate in a single response. By limiting the maximum output length, the system can prevent truncation of the output or allow more space for long responses.
+  >
+  > _Note: If the reponse is truncated, use `continue` as the next prompt and optionally increase Maximum Output Length.  The model should continue responding to the initial prompt._
+
+- Temperature
+
+  > Controls the randomness and/or creativity of the output. Lower temperatures provide less random output.  Higher temperatures provide output that is more random.  The temperature is related to the concept of [Boltzmann temperature in statistical mechanics](https://en.wikipedia.org/wiki/Boltzmann_distribution), where a higher temperature corresponds to more random and exploratory sampling from the probability distribution.
 
 ## Ollama and Open Web UI
 
