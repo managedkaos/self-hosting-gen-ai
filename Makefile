@@ -25,14 +25,20 @@ spellcheck:
 pull-external-content: 0-laptop-ollama-openwebui 1-cloud-ollama-openwebui
 
 0-laptop-ollama-openwebui:
-	cp -v ../ollama-mgmt/README.md ./0-laptop-ollama-openwebui
-	cp -v ../ollama-mgmt/Makefile ./0-laptop-ollama-openwebui
-	cp -v ../ollama-mgmt/*.txt ./0-laptop-ollama-openwebui
-	cp -v ../ollama-mgmt/*.py ./0-laptop-ollama-openwebui
+	rsync --archive --verbose --compress \
+		--exclude='*' \
+		--include='README.md' \
+		--include='Makefile' \
+		--include='*.txt' \
+		--include='*.py' \
+		~/Workspace/ollama-mgmt/ $(PWD)/0-laptop-ollama-openwebui/
 
 1-cloud-ollama-openwebui:
-	cp -v ../ollama-cloudformation/README.md ./1-cloud-ollama-openwebui
-	cp -v ../ollama-cloudformation/Makefile ./1-cloud-ollama-openwebui
-	cp -v ../ollama-cloudformation/*.yml ./1-cloud-ollama-openwebui
+	rsync --archive -verbose --compress \
+		--exclude='*' \
+		--include='README.md' \
+		--include='Makefile' \
+		--include='*.yml' \
+		~/Workspace/ollama-cloudformation/ $(PWD)/1-cloud-ollama-openwebui/
 
 .PHONY: all lint rawlint info pull-external-content 0-laptop-ollama-openwebui 1-cloud-ollama-openwebui

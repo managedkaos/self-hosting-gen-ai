@@ -11,7 +11,7 @@
 **OK. As technologists, how can we own the use and management of generative AI infrastructure today and in the future?**
 
 - [Let's get started](#A-Process-for-Self-Hosting-Generative-AI)
-- [Take a peek at the glossoary when you need to ...](documents/0-GLOSSARY.md)
+- [Take a peek at the glossary when you need to ...](documents/0-GLOSSARY.md)
 
 ## The Rise of Generative Artificial Intelligence
 
