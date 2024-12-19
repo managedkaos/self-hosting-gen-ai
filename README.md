@@ -209,9 +209,6 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
   ```
 
-- Use [Docker](https://www.docker.com/) to run the Open WebUI image as a container.
-
-
 ### Installing Ollama and Open Web UI on a Laptop _(With Demonstration)_
 
 #### Hardware and Operating System Requirements
