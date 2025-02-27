@@ -128,8 +128,6 @@ couple of weeks have convinced me the honor may belong to something else: Open A
 
 - [Caylent AI Battleground](https://battleground.caylent.com/chat)
 
-  **_I really like this playground but it was generating errors during the last time I tested it (2024-09-04) (MJ)_**
-
   > Free, requires registration
   >
   > Compare models by examining their performance
